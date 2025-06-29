@@ -17,23 +17,22 @@ jobs:
     steps:
       - name: Checkout kode
         uses: actions/checkout@v3
-      
+
       - name: Setup Node.js
         uses: actions/setup-node@v3
         with:
-          node-version: 16
+          node-version: 18
+
+      - name: Cache npm dependencies
+        uses: actions/cache@v3
+        with:
+          path: ~/.npm
+          key: ${{ runner.os }}-node-${{ hashFiles('package-lock.json') }}-v18
+          restore-keys: |
+            ${{ runner.os }}-node-
 
       - name: Install dependencies
         run: npm install
 
-      - name: Jalankan Cypress tests
+      - name: Run Cypress tests
         run: npx cypress run
-
-      - name: Upload Cypress video dan screenshot (optional)
-        if: failure()
-        uses: actions/upload-artifact@v4
-        with:
-          name: cypress-artifacts
-          path: |
-            cypress/videos
-            cypress/screenshots

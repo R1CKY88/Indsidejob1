@@ -1,0 +1,15 @@
+# Node modules dan folder build
+node_modules/
+dist/
+build/
+
+# Cypress cahce dan hasil run (screenshot dan video)
+cypress/videos/
+cypress/screenshot/
+
+# log files
+*.log
+
+# OS files
+.DS_Store
+Thumbs.db
